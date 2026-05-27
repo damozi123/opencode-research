@@ -251,54 +251,70 @@ def plot_spatial_maps(df):
     out_dir = Path("output")
     out_dir.mkdir(exist_ok=True)
 
+    # 检查是否规则格网
+    gx_vals = sorted(df['grid_x'].unique()) if 'grid_x' in df.columns else []
+    gy_vals = sorted(df['grid_y'].unique()) if 'grid_y' in df.columns else []
+    is_rect = 'grid_x' in df.columns and (len(gx_vals) * len(gy_vals) == len(df))
+    n_pad = grid_size if grid_size > 0 else int(np.ceil(np.sqrt(len(df))))
+
+    def to_heatmap_raw(values):
+        padded = np.full(n_pad * n_pad, np.nan)
+        padded[:len(values)] = np.array(values)[:n_pad*n_pad]
+        return padded.reshape(n_pad, n_pad)
+
+    def to_heatmap(col):
+        if is_rect:
+            data = np.full((len(gx_vals), len(gy_vals)), np.nan)
+            gx_idx = {v: i for i, v in enumerate(gx_vals)}
+            gy_idx = {v: i for i, v in enumerate(gy_vals)}
+            for _, row in df.iterrows():
+                data[gx_idx[row['grid_x']], gy_idx[row['grid_y']]] = row[col]
+            return data
+        else:
+            return to_heatmap_raw(df[col].values)
+
     fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 
     ax = axes[0, 0]
-    im = ax.imshow(df['accessibility'].values.reshape(grid_size, grid_size),
-                   cmap='RdYlGn', origin='lower')
-    ax.set_title('可达性得分', fontsize=13)
+    im = ax.imshow(to_heatmap('accessibility'), cmap='RdYlGn', origin='lower')
+    ax.set_title('Accessibility', fontsize=13)
     plt.colorbar(im, ax=ax, shrink=0.8)
 
     ax = axes[0, 1]
-    im = ax.imshow(df['road_density'].values.reshape(grid_size, grid_size),
-                   cmap='Blues', origin='lower')
-    ax.set_title('路网密度 (km/km²)', fontsize=13)
+    im = ax.imshow(to_heatmap('road_density'), cmap='Blues', origin='lower')
+    ax.set_title('Road Density', fontsize=13)
     plt.colorbar(im, ax=ax, shrink=0.8)
 
     ax = axes[0, 2]
-    im = ax.imshow(df['pop_density'].values.reshape(grid_size, grid_size),
-                   cmap='OrRd', origin='lower')
-    ax.set_title('人口密度', fontsize=13)
+    im = ax.imshow(to_heatmap('pop_density'), cmap='OrRd', origin='lower')
+    ax.set_title('Pop Density', fontsize=13)
     plt.colorbar(im, ax=ax, shrink=0.8)
 
     # 归因地图（颜色编码）
     ax = axes[1, 0]
-    driver_map = np.zeros(grid_size * grid_size)
+    driver_map = np.zeros(len(df))
     driver_names = ['road_density', 'intersection_density', 'road_hierarchy_mix',
                     'pop_density', 'dist_to_cbd', 'nearest_station_dist', 'land_use_mix',
                     'age_65_ratio', 'building_density', 'nightlight', 'land_price']
     for i, d in enumerate(driver_names):
         driver_map[df['top_driver'] == d] = i + 1
-    im = ax.imshow(driver_map.reshape(grid_size, grid_size),
-                   cmap='tab10', origin='lower', vmin=0, vmax=10)
-    ax.set_title('首要归因因子', fontsize=13)
+    im = ax.imshow(to_heatmap_raw(driver_map), cmap='tab10', origin='lower', vmin=0, vmax=10)
+    ax.set_title('Top Attribution Driver', fontsize=13)
 
     # CATE 图
     ax = axes[1, 1]
-    im = ax.imshow(df['cate'].values.reshape(grid_size, grid_size),
-                   cmap='RdYlBu_r', origin='lower')
-    ax.set_title('CATE: 路网改善边际效应', fontsize=13)
+    im = ax.imshow(to_heatmap('cate'), cmap='RdYlBu_r', origin='lower')
+    ax.set_title('CATE: Road Improvement Effect', fontsize=13)
     plt.colorbar(im, ax=ax, shrink=0.8)
 
     # 可及性等级
     ax = axes[1, 2]
     levels = {'非常低': 1, '低': 2, '中': 3, '高': 4, '非常高': 5}
     level_map = df['access_level'].map(levels).values
-    im = ax.imshow(level_map.reshape(grid_size, grid_size),
-                   cmap='RdYlGn', origin='lower', vmin=0, vmax=5)
-    ax.set_title('可达性等级', fontsize=13)
+    im = ax.imshow(to_heatmap_raw(level_map), cmap='RdYlGn', origin='lower', vmin=0, vmax=5)
+    ax.set_title('Access Level', fontsize=13)
 
-    fig.suptitle('城市急救可达性空间分异 — 归因分析', fontsize=15, fontweight='bold')
+    fig.suptitle('EMS Accessibility Spatial Causal Analysis', fontsize=15, fontweight='bold')
     plt.tight_layout()
     fig.savefig(out_dir / "spatial_causal_attribution.png", dpi=150, bbox_inches='tight')
     plt.close()
