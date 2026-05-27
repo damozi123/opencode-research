@@ -1,0 +1,132 @@
+{
+  "repos": [
+    {
+      "name": "K-Dense-AI / scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "stars": 26200,
+      "skills": 138,
+      "description": "138 科研 Skills：生物信息学、药物发现、临床研究、材料科学、数据库查询等",
+      "tags": ["科研", "Python", "数据库", "文献"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "Orchestra-Research / AI-Research-SKILLs",
+      "url": "https://github.com/Orchestra-Research/AI-Research-SKILLs",
+      "stars": 9000,
+      "skills": 98,
+      "description": "AI/ML 研究全栈 Skills：模型架构、微调、推理、论文写作",
+      "tags": ["科研", "AI", "ML", "论文"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "zLanqing / codex-claude-academic-skills",
+      "url": "https://github.com/zLanqing/codex-claude-academic-skills",
+      "stars": 163,
+      "skills": 3,
+      "description": "学术 Skills：文献阅读报告、论文写作润色审查、科学计算",
+      "tags": ["论文", "学术", "写作", "科学计算"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "Cedriccmh / claude-code-skill-scrapling",
+      "url": "https://github.com/Cedriccmh/claude-code-skill-scrapling",
+      "stars": 305,
+      "skills": 1,
+      "description": "智能网页抓取 Skill：自动选择 Fetcher、绕过 Cloudflare",
+      "tags": ["网页", "抓取", "爬虫"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "BrikerMan / skilless.ai",
+      "url": "https://github.com/BrikerMan/skilless.ai",
+      "stars": 190,
+      "skills": 3,
+      "description": "Web 搜索、Web 抓取、视频下载和字幕提取 Skills",
+      "tags": ["网页", "搜索", "抓取", "视频"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "JimLiu / baoyu-skills",
+      "url": "https://github.com/JimLiu/baoyu-skills",
+      "stars": 19600,
+      "skills": 50,
+      "description": "中文友好的综合 Skills 集合：开发、文档、数据分析等",
+      "tags": ["中文", "开发", "数据分析", "综合"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "alirezarezvani / claude-skills",
+      "url": "https://github.com/alirezarezvani/claude-skills",
+      "stars": 16300,
+      "skills": 329,
+      "description": "329 Skills：工程、营销、产品、合规、商业、研究、生产力",
+      "tags": ["开发", "商业", "综合", "工程"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "trailofbits / skills (安全)",
+      "url": "https://github.com/trailofbits/skills",
+      "stars": 3700,
+      "skills": 21,
+      "description": "21 安全 Skills：智能合约审计、静态分析、渗透测试",
+      "tags": ["安全", "审计", "代码审查"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "Lum1104 / Understand-Anything",
+      "url": "https://github.com/Lum1104/Understand-Anything",
+      "stars": 37600,
+      "skills": 1,
+      "description": "代码知识图谱：将任意代码转为可交互知识图谱",
+      "tags": ["代码理解", "知识图谱", "分析"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "OthmanAdi / planning-with-files",
+      "url": "https://github.com/OthmanAdi/planning-with-files",
+      "stars": 22200,
+      "skills": 1,
+      "description": "Manus 风格持久化 Markdown 规划 Skill",
+      "tags": ["规划", "项目管理"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "yusufkaraaslan / Skill_Seekers",
+      "url": "https://github.com/yusufkaraaslan/Skill_Seekers",
+      "stars": 13800,
+      "skills": 1,
+      "description": "将文档网站、GitHub 仓库、PDF 转换为 AI Skills",
+      "tags": ["转换", "生成", "文档"],
+      "install_path": "skills",
+      "branch": "main"
+    },
+    {
+      "name": "aipoch / medical-research-skills",
+      "url": "https://github.com/aipoch/medical-research-skills",
+      "stars": 850,
+      "skills": 200,
+      "description": "医学研究专用：实验设计、数据分析、循证医学、学术写作",
+      "tags": ["医学", "科研", "临床试验"],
+      "install_path": "skills",
+      "branch": "main"
+    }
+  ],
+  "categories": {
+    "学术": ["科研", "论文", "学术", "文献", "写作", "科学计算"],
+    "数据": ["数据库", "数据分析", "爬虫", "抓取", "网页", "搜索"],
+    "开发": ["Python", "开发", "工程", "代码", "Web"],
+    "研究": ["AI", "ML", "医学", "生物信息学", "药物", "临床试验"]
+  },
+  "install_dir_local": ".opencode/skills",
+  "install_dir_global": "~/.config/opencode/skills"
+}

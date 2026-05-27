@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "academic": {
+      "type": "local",
+      "command": ["python", "D:\\opencode\\mcp_server.py"],
+      "enabled": true,
+      "timeout": 30000
+    }
+  }
+}
