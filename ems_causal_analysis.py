@@ -319,6 +319,9 @@ def plot_spatial_maps(df):
     fig.savefig(out_dir / "spatial_causal_attribution.png", dpi=150, bbox_inches='tight')
     plt.close()
     print(f"\n图已保存: {out_dir / 'spatial_causal_attribution.png'}")
+    # 自动用浏览器打开
+    import webbrowser
+    webbrowser.open(str(out_dir / "spatial_causal_attribution.png"))
 
 
 # ── 5. 全局重要性图表 ──────────────────────────────────
@@ -355,6 +358,8 @@ def plot_importance_bar(shap_values, features):
     plt.tight_layout()
     fig.savefig(out_dir / "feature_importance.png", dpi=150, bbox_inches='tight')
     plt.close()
+    import webbrowser
+    webbrowser.open(str(out_dir / "feature_importance.png"))
 
 
 # ── 6. 主函数 ──────────────────────────────────────────
